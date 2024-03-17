@@ -1,9 +1,9 @@
-import {sql} from "@astrojs/db/runtime"
+import { sql } from "@astrojs/db/runtime";
 import type { SqliteDB, Table } from "@astrojs/db/runtime";
 
 import type { Adapter, DatabaseSession, DatabaseUser, UserId } from "lucia";
 
-export class DrizzleSQLiteAdapter implements Adapter {
+export class AstroDBAdapter implements Adapter {
 	private db: SqliteDB;
 
 	private sessionTable: SessionTable;
@@ -58,7 +58,7 @@ export class DrizzleSQLiteAdapter implements Adapter {
 				userId: session.userId,
 				expiresAt: session.expiresAt,
 				...session.attributes
-			} )
+			})
 			.run();
 	}
 
