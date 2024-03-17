@@ -1,6 +1,6 @@
 import { sql } from "@astrojs/db/runtime";
-import type { SqliteDB, Table } from "@astrojs/db/runtime";
 
+import type { SqliteDB, Table } from "@astrojs/db/runtime";
 import type { Adapter, DatabaseSession, DatabaseUser, UserId } from "lucia";
 
 export class AstroDBAdapter implements Adapter {
