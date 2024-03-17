@@ -1,0 +1,42 @@
+{
+	"name": "lucia-adapter-astrodb",
+	"type": "module",
+	"version": "0.0.1",
+	"description": "Astro DB adapter for Lucia",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"module": "dist/index.js",
+	"scripts": {
+		"build": "rm -rf dist/* && tsc --project tsconfig.build.json",
+		"format": "prettier -w .",
+		"lint": "eslint src",
+		"test": "vitest run --sequence.concurrent"
+	},
+	"files": [
+		"/dist/"
+	],
+	"keywords": [
+		"lucia",
+		"astro"
+	],
+	"author": "pilcrowOnPaper",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/pilcrowOnPaper/lucia-adapter-astrodb"
+	},
+	"devDependencies": {
+		"@astrojs/db": "^0.8.6",
+		"@lucia-auth/adapter-test": "^5.0.1",
+		"@typescript-eslint/eslint-plugin": "^6.7.5",
+		"@typescript-eslint/parser": "^6.7.5",
+		"auri": "1.0.2",
+		"eslint": "^8.51.0",
+		"prettier": "^3.0.3",
+		"typescript": "^5.2.2"
+	},
+	"peerDependencies": {
+		"lucia": "3.x",
+		"@astrojs/db": "0.8.x"
+	}
+}
