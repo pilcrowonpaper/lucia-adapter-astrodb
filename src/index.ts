@@ -75,11 +75,27 @@ export class AstroDBAdapter implements Adapter {
 	public async deleteExpiredSessions(): Promise<void> {
 		await this.db
 			.delete(this.sessionTable)
-			.where(sql`${this.sessionTable.expiresAt} <= ${new Date()}`);
+			.where(sql`${this.sessionTable.expiresAt} <= ${new Date().toISOString()}`);
 	}
 }
 
-type UserIdColumnType = UserId extends string ? "text" : UserId extends number ? "number" : never;
+function transformIntoDatabaseSession(raw: any): DatabaseSession {
+	const { id, userId, expiresAt, ...attributes } = raw;
+	return {
+		userId,
+		id,
+		expiresAt,
+		attributes
+	};
+}
+
+function transformIntoDatabaseUser(raw: any): DatabaseUser {
+	const { id, ...attributes } = raw;
+	return {
+		id,
+		attributes
+	};
+}
 
 export type UserTable = Table<
 	any,
@@ -144,20 +160,4 @@ export type SessionTable = Table<
 	}
 >;
 
-function transformIntoDatabaseSession(raw: any): DatabaseSession {
-	const { id, userId, expiresAt: expiresAtUnix, ...attributes } = raw;
-	return {
-		userId,
-		id,
-		expiresAt: new Date(expiresAtUnix * 1000),
-		attributes
-	};
-}
-
-function transformIntoDatabaseUser(raw: any): DatabaseUser {
-	const { id, ...attributes } = raw;
-	return {
-		id,
-		attributes
-	};
-}
+type UserIdColumnType = UserId extends string ? "text" : UserId extends number ? "number" : never;
