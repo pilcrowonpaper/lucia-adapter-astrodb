@@ -73,9 +73,7 @@ export class AstroDBAdapter implements Adapter {
 	}
 
 	public async deleteExpiredSessions(): Promise<void> {
-		await this.db
-			.delete(this.sessionTable)
-			.where(lte(this.sessionTable.expiresAt, new Date().toISOString()));
+		await this.db.delete(this.sessionTable).where(lte(this.sessionTable.expiresAt, new Date()));
 	}
 }
 

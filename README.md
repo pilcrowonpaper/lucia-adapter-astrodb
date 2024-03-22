@@ -8,6 +8,21 @@ npm i lucia-adapter-astrodb
 
 ## Setup
 
+You need to manually mark `astro:db` as an external dependency.
+
+```ts
+export default defineConfig({
+	// ...
+	vite: {
+		optimizeDeps: {
+			exclude: ["astro:db"]
+		}
+	}
+});
+```
+
+Define the schema and initialize the adapter.
+
 ```ts
 // db/config.ts
 import { column, defineDb, defineTable } from "astro:db";

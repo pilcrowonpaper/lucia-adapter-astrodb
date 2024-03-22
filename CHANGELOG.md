@@ -1,8 +1,12 @@
 # lucia-adapter-astrodb
 
+## 0.0.5
+
+- Fix bugs.
+
 ## 0.0.4
 
-- Fix imports.
+- Breaking: Import `astro:db`.
 
 ## 0.0.3
 
