@@ -1,4 +1,4 @@
-import { sql } from "@astrojs/db/runtime";
+import { eq, lte } from "astro:db";
 
 import type { SqliteDB, Table } from "@astrojs/db/runtime";
 import type { Adapter, DatabaseSession, DatabaseUser, UserId } from "lucia";
@@ -16,11 +16,11 @@ export class AstroDBAdapter implements Adapter {
 	}
 
 	public async deleteSession(sessionId: string): Promise<void> {
-		await this.db.delete(this.sessionTable).where(sql`${this.sessionTable.id} = ${sessionId}`);
+		await this.db.delete(this.sessionTable).where(eq(this.sessionTable.id, sessionId));
 	}
 
 	public async deleteUserSessions(userId: UserId): Promise<void> {
-		await this.db.delete(this.sessionTable).where(sql`${this.sessionTable.userId} = ${userId}`);
+		await this.db.delete(this.sessionTable).where(eq(this.sessionTable.userId, userId));
 	}
 
 	public async getSessionAndUser(
@@ -32,8 +32,8 @@ export class AstroDBAdapter implements Adapter {
 				session: this.sessionTable
 			})
 			.from(this.sessionTable)
-			.innerJoin(this.userTable, sql`${this.sessionTable.userId} = ${this.userTable.id}`)
-			.where(sql`${this.sessionTable.id} = ${sessionId}`)
+			.innerJoin(this.userTable, eq(this.sessionTable.userId, this.userTable.id))
+			.where(eq(this.sessionTable.id, sessionId))
 			.get();
 		if (!result) return [null, null];
 		return [transformIntoDatabaseSession(result.session), transformIntoDatabaseUser(result.user)];
@@ -43,7 +43,7 @@ export class AstroDBAdapter implements Adapter {
 		const result = await this.db
 			.select()
 			.from(this.sessionTable)
-			.where(sql`${this.sessionTable.userId} = ${userId}`)
+			.where(eq(this.sessionTable.userId, userId))
 			.all();
 		return result.map((val) => {
 			return transformIntoDatabaseSession(val);
@@ -68,14 +68,14 @@ export class AstroDBAdapter implements Adapter {
 			.set({
 				expiresAt: expiresAt
 			})
-			.where(sql`${this.sessionTable.id} = ${sessionId}`)
+			.where(eq(this.sessionTable.id, sessionId))
 			.run();
 	}
 
 	public async deleteExpiredSessions(): Promise<void> {
 		await this.db
 			.delete(this.sessionTable)
-			.where(sql`${this.sessionTable.expiresAt} <= ${new Date().toISOString()}`);
+			.where(lte(this.sessionTable.expiresAt, new Date().toISOString()));
 	}
 }
 
