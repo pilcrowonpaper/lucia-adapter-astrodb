@@ -1,3 +1,4 @@
+/// <reference types="@astrojs/db" />
 import { eq, lte } from "astro:db";
 
 import type { SqliteDB, Table } from "@astrojs/db/runtime";
