@@ -11,6 +11,7 @@ npm i lucia-adapter-astrodb
 You need to manually mark `astro:db` as an external dependency.
 
 ```ts
+// astro.config.mjs
 export default defineConfig({
 	// ...
 	vite: {
