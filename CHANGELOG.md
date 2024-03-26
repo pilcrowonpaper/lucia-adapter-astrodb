@@ -1,5 +1,11 @@
 # lucia-adapter-astrodb
 
+## 0.0.7
+
+### Patch changes
+
+- Update README.
+
 ## 0.0.6
 
 ### Patch changes
