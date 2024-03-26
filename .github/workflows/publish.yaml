@@ -2,6 +2,7 @@ name: "Publish package"
 on: [push]
 
 env:
+  AURI_GITHUB_TOKEN: ${{secrets.AURI_GITHUB_TOKEN}}
   NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
 
 jobs:
