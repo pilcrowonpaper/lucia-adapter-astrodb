@@ -1,5 +1,11 @@
 # lucia-adapter-astrodb
 
+## 0.0.8
+
+### Patch changes
+
+- Update peer dependency. ([#10](https://github.com/pilcrowOnPaper/lucia-adapter-astrodb/pull/10))
+
 ## 0.0.7
 
 ### Patch changes
