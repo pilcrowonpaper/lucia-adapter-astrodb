@@ -1,16 +1,16 @@
 /// <reference types="@astrojs/db" />
 import { eq, lte } from "astro:db";
 
-import type { SqliteDB, Table } from "@astrojs/db/runtime";
+import type { Database, Table } from "@astrojs/db/runtime";
 import type { Adapter, DatabaseSession, DatabaseUser, UserId } from "lucia";
 
 export class AstroDBAdapter implements Adapter {
-	private db: SqliteDB;
+	private db: Database;
 
 	private sessionTable: SessionTable;
 	private userTable: UserTable;
 
-	constructor(db: SqliteDB, sessionTable: SessionTable, userTable: UserTable) {
+	constructor(db: Database, sessionTable: SessionTable, userTable: UserTable) {
 		this.db = db;
 		this.sessionTable = sessionTable;
 		this.userTable = userTable;
