@@ -37,7 +37,7 @@
 		"typescript": "^5.5.3"
 	},
 	"peerDependencies": {
-		"@astrojs/db": "^0.11",
+		"@astrojs/db": "^0.12.0",
 		"lucia": "3.x"
 	}
 }
