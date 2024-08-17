@@ -1,5 +1,11 @@
 # lucia-adapter-astrodb
 
+## 0.1.0
+
+### Major changes
+
+- Require > 0.12.0
+
 ## 0.0.8
 
 ### Patch changes
